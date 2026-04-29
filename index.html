@@ -372,12 +372,16 @@
 
     .project-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: stretch;
     }
 
     .project-card {
       padding: 24px;
       break-inside: avoid;
       page-break-inside: avoid;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
     }
 
     .project-card h3,
@@ -411,7 +415,7 @@
     }
 
     .result-box {
-      margin-top: 14px;
+      margin-top: auto;
       padding: 14px;
       border-radius: 12px;
       background: var(--primary-soft);
@@ -472,6 +476,135 @@
       font-size: 0.96rem;
     }
 
+
+
+    .case-study-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .case-study-card {
+      display: grid;
+      grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+      gap: 24px;
+      padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      break-inside: avoid;
+      page-break-inside: avoid;
+      align-items: start;
+    }
+
+    .case-thumb {
+      display: grid;
+      gap: 10px;
+    }
+
+    .case-thumb-frame {
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: var(--surface-soft);
+    }
+
+    .case-thumb-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      aspect-ratio: 4 / 5;
+    }
+
+    .case-caption {
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.5;
+    }
+
+    .case-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .case-label {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .case-meta {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .case-body h3 {
+      margin: 0 0 10px;
+      font-size: 1.18rem;
+      letter-spacing: -0.03em;
+    }
+
+    .case-summary {
+      margin: 0 0 16px;
+      color: #434343;
+      font-size: 0.96rem;
+    }
+
+    .case-list {
+      margin: 0;
+      padding-left: 18px;
+      color: #414141;
+    }
+
+    .case-list li+li {
+      margin-top: 8px;
+    }
+
+    .case-links {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .case-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      background: var(--surface-soft);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .case-link:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .case-result {
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 12px;
+      background: var(--primary-soft);
+      border: 1px solid #ffd8d2;
+      font-size: 0.93rem;
+      color: #6a2e23;
+      font-weight: 700;
+    }
+
     .footer {
       padding: 30px 0 42px;
       color: var(--muted);
@@ -485,6 +618,10 @@
       .stack-grid,
       .info-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .case-study-card {
+        grid-template-columns: 280px minmax(0, 1fr);
       }
     }
 
@@ -514,6 +651,7 @@
       .hero-detail,
       .section-card,
       .project-card,
+      .case-study-card,
       .timeline-item,
       .stack-group,
       .info-card {
@@ -526,6 +664,14 @@
       .info-grid,
       .hero-detail-grid {
         grid-template-columns: 1fr;
+      }
+
+      .case-study-card {
+        grid-template-columns: 1fr;
+      }
+
+      .case-thumb-frame img {
+        aspect-ratio: 16 / 10;
       }
 
       .topbar-inner {
@@ -581,11 +727,20 @@
       .hero-detail,
       .section-card,
       .project-card,
+      .case-study-card,
       .timeline-item,
       .stack-group,
       .info-card {
         box-shadow: none;
         border: 1px solid #d0d0d0;
+      }
+
+      .case-study-card {
+        grid-template-columns: 1fr;
+      }
+
+      .case-thumb-frame img {
+        aspect-ratio: auto;
       }
 
       .footer {
@@ -603,6 +758,7 @@
         <a href="#about">소개</a>
         <a href="#career">경력</a>
         <a href="#projects">Projects</a>
+        <a href="#case-studies">Case Studies</a>
         <a href="#stack">기술 스택</a>
         <a href="#credibility">이력/자격</a>
       </nav>
@@ -628,7 +784,7 @@
           </div>
           <div class="proof-item">
             <span class="proof-label">실무 범위</span>
-            <strong>화면 · 데이터 · 리포트 · 테스트 · 배포까지 연결</strong>
+            <strong>화면 · 데이터 · 리포트 · 테스트 · 배포 연결</strong>
           </div>
           <div class="proof-item">
             <span class="proof-label">확장 경험</span>
@@ -661,9 +817,9 @@
         <div>
           <p class="side-title">Quick Summary</p>
           <ul class="point-list">
-            <li>여신업무, 대출 프로세스, 전자리포트 반영 등 운영성 업무 경험</li>
-            <li>레거시 개선, 브라우저 호환성 보완, 성능 개선 경험</li>
-            <li>실무 흐름 분석 후 업무 자동화 시스템 구축 경험</li>
+            <li>여신업무, 대출 프로세스, 전자리포트 반영 등 운영성 업무</li>
+            <li>레거시 개선, 브라우저 호환성 보완, 성능 개선</li>
+            <li>실무 흐름 분석 후 업무 자동화 시스템 구축</li>
           </ul>
         </div>
 
@@ -689,19 +845,19 @@
         <div class="hero-detail-grid">
           <article class="hero-detail-item">
             <strong>롯데캐피탈 운영 개발</strong>
-            <p>1년간 40여 건의 SR을 처리하며 여신업무 화면, 데이터, 전자리포트, 전자문서 반영까지 수행했습니다.</p>
+            <p>1년간 40여 건의 SR을 처리하며 여신업무 화면, 데이터, 전자리포트, 전자문서 반영</p>
           </article>
           <article class="hero-detail-item">
             <strong>도이치파이낸셜 화면 전환</strong>
-            <p>레거시 화면을 WebSquare 기반으로 전환하고, 브라우저 호환성과 업무 화면 정합성을 보완했습니다.</p>
+            <p>레거시 화면을 WebSquare 기반으로 전환하고, 브라우저 호환성과 업무 화면 정합성 보완</p>
           </article>
           <article class="hero-detail-item">
             <strong>KB증권 업무 화면 개발</strong>
-            <p>법인 고객 대상 채권 거래 화면을 개발하며 금융 업무 화면 구현 경험을 쌓았습니다.</p>
+            <p>법인 고객 대상 채권 거래 화면을 개발하며 금융 업무 화면 구현</p>
           </article>
           <article class="hero-detail-item">
             <strong>사내 인사급여 시스템 구축</strong>
-            <p>수기 중심 업무를 시스템화하고 급여명세서 Excel 생성과 메일 발송 자동화를 구현했습니다.</p>
+            <p>수기 중심 업무를 시스템화하고 급여명세서 Excel 생성과 메일 발송 자동화 구현</p>
           </article>
         </div>
       </div>
@@ -720,7 +876,7 @@
             </div>
             <div class="timeline-date">2022.01 – 2025.05</div>
           </div>
-          <p class="timeline-desc">금융권 고객사 프로젝트를 중심으로 업무 시스템 고도화, 운영성 개발, 전자리포트 반영, 데이터 구조 조정, 테스트와 배포 반영까지 수행했습니다.</p>
+          <p class="timeline-desc">금융권 고객사 프로젝트를 중심으로 업무 시스템 고도화, 운영성 개발, 전자리포트 반영, 데이터 구조 조정, 테스트와 배포 반영 수행</p>
           <ul class="bullet-list">
             <li>롯데캐피탈: 여신업무 시스템 기능 개선 및 운영 반영</li>
             <li>도이치파이낸셜: 레거시 화면 전환 및 브라우저 호환성 개선</li>
@@ -737,7 +893,7 @@
             </div>
             <div class="timeline-date">2021.06 – 2021.12</div>
           </div>
-          <p class="timeline-desc">의료용 검사 앱과 검사키트 운영 과정에서 정확도 검증, 이슈 분석, 반복 업무 자동화, 기술 제약사항 문서화를 수행했습니다.</p>
+          <p class="timeline-desc">의료용 검사 앱과 검사키트 운영 과정에서 정확도 검증, 이슈 분석, 반복 업무 자동화, 기술 제약사항 문서화 수행</p>
           <ul class="bullet-list">
             <li>검사 결과 정확도 향상을 위한 반복 테스트 설계 및 비교 분석</li>
             <li>RGB 기반 판정 구조 분석과 기능 이슈 정리</li>
@@ -756,8 +912,8 @@
           <span class="eyebrow">Case Study 01</span>
           <h3>인사급여 시스템 디지털 전환</h3>
           <div class="project-meta">사내 프로젝트 · 2022.01 – 2022.06 / 2023.01 – 2023.04</div>
-          <p>수기 중심으로 운영되던 인사·급여 업무를 웹 시스템으로 전환한 프로젝트입니다. 직원 등록, 급여 항목 관리, 월 급여 계산, Excel 급여명세서 생성, 메일 발송까지 전 과정을
-            시스템화했습니다.</p>
+          <p>수기 중심으로 운영되던 인사·급여 업무를 웹 시스템으로 전환한 프로젝트. 직원 등록, 급여 항목 관리, 월 급여 계산, Excel 급여명세서 생성, 메일 발송까지 전 과정을
+            시스템화.</p>
           <ul class="bullet-list" style="margin-top: 14px;">
             <li>실무자 업무 흐름을 기준으로 화면·기능·데이터 구조 정리</li>
             <li>Apache POI 기반 Excel 생성, JavaMail 기반 명세서 발송 자동화</li>
@@ -771,7 +927,7 @@
           <span class="eyebrow">Case Study 02</span>
           <h3>롯데캐피탈 여신업무 시스템 운영 개발</h3>
           <div class="project-meta">2024.05 – 2025.04</div>
-          <p>신용대출, 자동차담보대출, 전세자금대출, 기업대출 등 여신업무 시스템에서 기능 개선과 정책 반영을 수행했습니다. 화면, 쿼리, DTO, 메타, 리포트, 테스트와 운영 반영까지 맡았습니다.
+          <p>신용대출, 자동차담보대출, 전세자금대출, 기업대출 등 여신업무 시스템에서 기능 개선과 정책 반영. 화면, 쿼리, DTO, 메타, 리포트, 테스트와 운영 반영 수행.
           </p>
           <ul class="bullet-list" style="margin-top: 14px;">
             <li>조회 조건 수정, 컬럼 추가, 입력 제어, 팝업 개발 등 운영성 개선</li>
@@ -786,7 +942,7 @@
           <span class="eyebrow">Case Study 03</span>
           <h3>도이치파이낸셜 화면 전환 및 고도화</h3>
           <div class="project-meta">2023.04 – 2024.02</div>
-          <p>기존 IE 중심 금융 업무 시스템을 WebSquare 기반 구조로 전환하면서, 화면 기능 정합성과 브라우저 호환성을 보완한 프로젝트입니다.</p>
+          <p>기존 IE 중심 금융 업무 시스템을 WebSquare 기반 구조로 전환하며, 화면 기능 정합성과 브라우저 호환성을 보완한 프로젝트.</p>
           <ul class="bullet-list" style="margin-top: 14px;">
             <li>전체 전환 대상 약 800본 중 약 100본 내외의 화면 개발 담당</li>
             <li>조회, 등록, 팝업, 그리드, 파일 업로드, 리포트 호출 기능 구현</li>
@@ -794,6 +950,99 @@
             <li>신규 투입 인력 온보딩과 작업 기준 가이드 제공</li>
           </ul>
           <div class="result-box">대출 로직(DSR 시뮬레이션) 실행 속도를 3분에서 1분으로 개선하고, 다양한 브라우저에서 사용할 수 있도록 구조 보완</div>
+        </article>
+      </div>
+    </section>
+
+
+
+    <section class="section" id="case-studies">
+      <div class="section-heading">
+        <h2>Technical Case Studies</h2>
+      </div>
+      <div class="case-study-grid">
+        <article class="case-study-card">
+          <div class="case-thumb">
+            <div class="case-thumb-frame">
+              <img src="./portfolio_case_assets/legacy_case.png" alt="레거시 조회 기능 구조 분석 문서 대표 이미지" />
+            </div>
+            <div class="case-caption">요청 처리 흐름과 계층 분리를 중심으로 정리한 문서 요약 화면</div>
+          </div>
+          <div class="case-body">
+            <div class="case-header">
+              <span class="case-label">Structure Analysis</span>
+              <span class="case-meta">JSP · Spring · MyBatis</span>
+            </div>
+            <h3>레거시 조회 기능의 구조 분석 및 문서화</h3>
+            <p class="case-summary">기존 조회 기능을 빠르게 파악하기 위해 JSP, Service, XML Mapper의 역할을 나누고, 사용자 입력부터 JSP 렌더링까지
+              이어지는 요청 처리 흐름을 문서로 정리. 기능 수정 시 어디를 먼저 봐야 하는지, 어떤 값이 어떤 계층을 거쳐 전달되는지 한눈에 파악할 수 있도록 구성.</p>
+            <ul class="case-list">
+              <li>화면 입력, 서버 로직, SQL 실행, 화면 출력의 책임을 계층별로 분리해 설명</li>
+              <li>사용자 입력 → JSP 요청 전송 → Service 파라미터 처리 → XML Mapper SQL 실행 → DB 조회 → 결과 반환 → JSP 렌더링 흐름 정리</li>
+              <li>기능 변경이나 오류 추적 시 수정 범위를 빠르게 좁힐 수 있도록 문서화</li>
+            </ul>
+            <div class="case-result">기능 구현뿐 아니라, 기존 구조를 빠르게 이해하고 설명 가능한 형태로 재정리</div>
+            <div class="case-links">
+              <a class="case-link" href="./portfolio_case_assets/legacy_case.pdf" target="_blank" rel="noopener">PDF 보기</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="case-study-card">
+          <div class="case-thumb">
+            <div class="case-thumb-frame">
+              <img src="./portfolio_case_assets/vue_case.png" alt="기존 JSP 프로젝트에 Vue 점진 도입 사례 대표 이미지" />
+            </div>
+            <div class="case-caption">기존 프로젝트를 유지한 채 Vue 빌드 결과물과 라우팅 흐름을 연결한 구조 요약</div>
+          </div>
+          <div class="case-body">
+            <div class="case-header">
+              <span class="case-label">Incremental Adoption</span>
+              <span class="case-meta">aFrame · JSP · Vue 2 · Axios</span>
+            </div>
+            <h3>기존 JSP 프로젝트에 Vue 점진 도입</h3>
+            <p class="case-summary">기존 서버 렌더링 기반 프로젝트를 전면 교체하지 않고, 별도 Vue 프로젝트를 추가해 점진적으로 화면 계층을 전환한 사례. 운영 환경에서는 기존
+              시작 페이지가 Vue 빌드 산출물 경로를 바라보도록 연결하고, 백엔드 구조와 서비스 호출 방식은 유지한 채 프론트엔드만 단계적으로 분리</p>
+            <ul class="case-list">
+              <li>레거시 서버 구조를 유지하면서 Vue 프로젝트를 별도 디렉터리에서 관리</li>
+              <li>빌드 산출물만 기존 웹 애플리케이션 배포 경로에 연결해 느슨하게 결합</li>
+              <li>로그인 화면에서 v-model, axios POST, 라우터 이동 흐름을 구성해 기존 form submit 방식보다 세밀한 화면 제어 구조 구현</li>
+              <li>개발 시점 기준 안정성과 호환성을 고려해 Vue 2.6.14 선택</li>
+            </ul>
+            <div class="case-result">기존 시스템을 전면 교체하지 않고도 프론트엔드 구조를 확장할 수 있는 방향을 정리하고 적용</div>
+            <div class="case-links">
+              <a class="case-link" href="./portfolio_case_assets/vue_case.pdf" target="_blank" rel="noopener">PDF 보기</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="case-study-card">
+          <div class="case-thumb">
+            <div class="case-thumb-frame">
+              <img src="./portfolio_case_assets/excel_case.png" alt="대용량 엑셀 다운로드 기능 구현 및 성능 검증 대표 이미지" />
+            </div>
+            <div class="case-caption">엑셀 다운로드 구현 구조와 heap 조건별 검증 기준을 정리한 문서 대표 화면</div>
+          </div>
+          <div class="case-body">
+            <div class="case-header">
+              <span class="case-label">Implementation & Validation</span>
+              <span class="case-meta">Spring MVC · Apache POI · SXSSFWorkbook</span>
+            </div>
+            <h3>대용량 엑셀 다운로드 기능 구현 및 성능 검증</h3>
+            <p class="case-summary">DB 데이터를 xlsx 파일로 내려받는 기능을 구현하고, 데이터 양이 커질 때 어디까지 안정적으로 동작하는지 별도 실험으로 검증한 사례.
+              Service, ResponseUtil, ExcelView, ExcelVO로 책임을 나누고, 파일명 설정과 HTTP 헤더, 시트 작성, 출력 스트림 처리를 분리해 관리.</p>
+            <ul class="case-list">
+              <li>JSP → Service → ResponseUtil → ExcelView → ExcelVO → Download 흐름으로 구현 구조 정리</li>
+              <li>SXSSFWorkbook과 flush 단위를 사용해 대용량 파일 출력을 고려한 구조 적용</li>
+              <li>heap 2GB, 8GB, 12GB 조건에서 안정 구간과 실패 시점을 비교 검증</li>
+              <li>구현 이후 성능 검증까지 이어가며 운영 환경에서의 한계와 개선 방향 정리</li>
+            </ul>
+            <div class="case-result">2GB heap에서는 약 80,000행, 8GB에서는 약 160,000행, 12GB에서는 약 250,000행까지 안정적으로 처리 가능한 구간을
+              확인</div>
+            <div class="case-links">
+              <a class="case-link" href="./portfolio_case_assets/excel_case.pdf" target="_blank" rel="noopener">PDF 보기</a>
+            </div>
+          </div>
         </article>
       </div>
     </section>
@@ -858,7 +1107,7 @@
 
         <div class="work-style">
           <strong>Working Style</strong><br />
-          업무 흐름을 먼저 파악한 뒤, 화면·서버·데이터·문서 출력이 어떻게 연결되는지 기준으로 문제를 푸는 편입니다. 새로운 프레임워크나 툴도 빠르게 익히되, 운영 환경에서 실제로 반영 가능한 수준까지
+          업무 흐름을 먼저 파악한 뒤, 화면·서버·데이터·문서 출력이 어떻게 연결되는지 기준으로 문제를 해결합니다. 새로운 프레임워크나 툴도 빠르게 익히되, 운영 환경에서 실제로 반영 가능한 수준까지
           가져가는 것을 중요하게 생각합니다.
         </div>
       </div>
