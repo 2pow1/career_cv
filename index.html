@@ -74,7 +74,7 @@
     }
 
     .brand {
-      font-size: 1rem;
+      font-size: 0.98rem;
       font-weight: 800;
       letter-spacing: -0.03em;
     }
@@ -93,14 +93,19 @@
     }
 
     .hero {
-      padding: 56px 0 28px;
+      padding: 56px 0 12px;
       display: grid;
-      grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.9fr);
-      gap: 24px;
+      grid-template-columns: minmax(0, 2.08fr) minmax(240px, 0.68fr);
+      grid-template-areas:
+        "main side"
+        "detail side";
+      gap: 20px;
+      align-items: start;
     }
 
     .hero-main,
     .hero-side,
+    .hero-detail,
     .section-card,
     .project-card,
     .timeline-item,
@@ -113,7 +118,9 @@
     }
 
     .hero-main {
-      padding: 34px;
+      grid-area: main;
+      padding: 32px;
+      align-self: start;
     }
 
     .hero-kicker {
@@ -129,24 +136,25 @@
     }
 
     .hero h1 {
-      margin: 18px 0 10px;
-      font-size: clamp(2.2rem, 5vw, 4rem);
-      line-height: 1.03;
+      margin: 16px 0 8px;
+      font-size: clamp(1.74rem, 2.75vw, 2.42rem);
+      line-height: 1.08;
       letter-spacing: -0.06em;
+      word-break: keep-all;
     }
 
     .hero-role {
       margin: 0;
-      font-size: 1.15rem;
+      font-size: 1.08rem;
       color: var(--muted);
       font-weight: 700;
     }
 
     .hero-summary {
-      margin: 24px 0 0;
-      max-width: 760px;
+      margin: 22px 0 0;
+      max-width: 720px;
       color: #404040;
-      font-size: 1rem;
+      font-size: 0.97rem;
     }
 
     .hero-summary p {
@@ -154,14 +162,15 @@
     }
 
     .proof-grid {
-      margin-top: 26px;
+      margin-top: 22px;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
+      gap: 12px;
+      align-items: start;
     }
 
     .proof-item {
-      padding: 16px;
+      padding: 14px;
       border-radius: var(--radius-md);
       background: var(--surface-soft);
       border: 1px solid var(--line);
@@ -169,24 +178,66 @@
 
     .proof-label {
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       color: var(--muted);
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 700;
     }
 
     .proof-item strong {
       display: block;
-      font-size: 1rem;
-      line-height: 1.5;
+      font-size: 0.96rem;
+      line-height: 1.38;
       letter-spacing: -0.02em;
     }
 
     .hero-side {
-      padding: 28px;
+      grid-area: side;
+      padding: 24px;
       display: grid;
-      gap: 18px;
+      gap: 16px;
       align-self: start;
+      height: fit-content;
+    }
+
+    .hero-detail {
+      grid-area: detail;
+      padding: 24px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .hero-detail h2 {
+      margin: 0;
+      font-size: 1.1rem;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .hero-detail-item {
+      padding: 14px 16px;
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+    }
+
+    .hero-detail-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.96rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-detail-item p {
+      margin: 0;
+      color: #454545;
+      font-size: 0.92rem;
+      line-height: 1.55;
     }
 
     .side-title {
@@ -211,7 +262,7 @@
     .contact-list li,
     .point-list li,
     .mini-list li {
-      padding-bottom: 12px;
+      padding-bottom: 10px;
       border-bottom: 1px solid var(--line);
     }
 
@@ -239,14 +290,11 @@
     }
 
     .section {
-      padding: 18px 0 0;
+      padding: 6px 0 0;
     }
 
     .section-heading {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 20px;
+      display: block;
       margin-bottom: 18px;
     }
 
@@ -254,13 +302,6 @@
       margin: 0;
       font-size: clamp(1.6rem, 3vw, 2.1rem);
       letter-spacing: -0.05em;
-    }
-
-    .section-heading p {
-      margin: 0;
-      color: var(--muted);
-      max-width: 620px;
-      font-size: 0.96rem;
     }
 
     .section-card {
@@ -456,11 +497,10 @@
 
       .hero {
         grid-template-columns: 1fr;
-      }
-
-      .section-heading {
-        align-items: start;
-        flex-direction: column;
+        grid-template-areas:
+          "main"
+          "detail"
+          "side";
       }
     }
 
@@ -471,6 +511,7 @@
 
       .hero-main,
       .hero-side,
+      .hero-detail,
       .section-card,
       .project-card,
       .timeline-item,
@@ -482,7 +523,8 @@
       .proof-grid,
       .project-grid,
       .stack-grid,
-      .info-grid {
+      .info-grid,
+      .hero-detail-grid {
         grid-template-columns: 1fr;
       }
 
@@ -536,6 +578,7 @@
 
       .hero-main,
       .hero-side,
+      .hero-detail,
       .section-card,
       .project-card,
       .timeline-item,
@@ -559,7 +602,7 @@
       <nav class="nav">
         <a href="#about">소개</a>
         <a href="#career">경력</a>
-        <a href="#projects">대표 프로젝트</a>
+        <a href="#projects">Projects</a>
         <a href="#stack">기술 스택</a>
         <a href="#credibility">이력/자격</a>
       </nav>
@@ -569,15 +612,13 @@
   <main class="container">
     <section class="hero" id="about">
       <div class="hero-main">
-        <span class="hero-kicker">4년 차 · 금융 도메인 중심 실무 경험</span>
-        <h1>금융 업무 시스템을 <br />운영 가능한 결과로 연결해온 개발자</h1>
+        <span class="hero-kicker">4년 차 · 업무 시스템 실무 경험</span>
+        <h1>업무 시스템 개발자</h1>
         <p class="hero-role">Backend / Full-stack Developer</p>
 
         <div class="hero-summary">
-          <p>Spring, Java, JSP, JavaScript, SQL(주로 Oracle) 기반으로 금융 업무 시스템의 화면 개발, 데이터 처리, 리포트 반영, 테스트, 배포까지 폭넓게 수행해왔습니다.
-          </p>
-          <p>KB증권, 도이치파이낸셜, 롯데캐피탈 프로젝트에서 업무 흐름을 이해한 뒤 변경사항을 안정적으로 반영하는 역할을 맡았고, 사내 프로젝트에서는 수기 중심의 인사·급여 업무를 시스템화해 실제 운영
-            효율 개선까지 만들어냈습니다.</p>
+          <p>Spring, Java, JSP, JavaScript, SQL 기반으로 화면 개발, 데이터 처리, 리포트 반영, 테스트, 배포까지 수행해왔습니다. KB증권, 도이치파이낸셜, 롯데캐피탈
+            프로젝트와 사내 인사급여 시스템 구축을 통해 운영 환경에서 실제로 동작하는 결과를 만드는 역할을 맡았습니다.</p>
         </div>
 
         <div class="proof-grid">
@@ -615,6 +656,8 @@
           </ul>
         </div>
 
+        <br>
+
         <div>
           <p class="side-title">Quick Summary</p>
           <ul class="point-list">
@@ -623,6 +666,8 @@
             <li>실무 흐름 분석 후 업무 자동화 시스템 구축 경험</li>
           </ul>
         </div>
+
+        <br>
 
         <div>
           <p class="side-title">Credentials</p>
@@ -638,12 +683,33 @@
           </ul>
         </div>
       </aside>
+
+      <div class="hero-detail">
+        <h2>Experience</h2>
+        <div class="hero-detail-grid">
+          <article class="hero-detail-item">
+            <strong>롯데캐피탈 운영 개발</strong>
+            <p>1년간 40여 건의 SR을 처리하며 여신업무 화면, 데이터, 전자리포트, 전자문서 반영까지 수행했습니다.</p>
+          </article>
+          <article class="hero-detail-item">
+            <strong>도이치파이낸셜 화면 전환</strong>
+            <p>레거시 화면을 WebSquare 기반으로 전환하고, 브라우저 호환성과 업무 화면 정합성을 보완했습니다.</p>
+          </article>
+          <article class="hero-detail-item">
+            <strong>KB증권 업무 화면 개발</strong>
+            <p>법인 고객 대상 채권 거래 화면을 개발하며 금융 업무 화면 구현 경험을 쌓았습니다.</p>
+          </article>
+          <article class="hero-detail-item">
+            <strong>사내 인사급여 시스템 구축</strong>
+            <p>수기 중심 업무를 시스템화하고 급여명세서 Excel 생성과 메일 발송 자동화를 구현했습니다.</p>
+          </article>
+        </div>
+      </div>
     </section>
 
     <section class="section" id="career">
       <div class="section-heading">
         <h2>Career Snapshot</h2>
-        <p>회사 단위 요약과 프로젝트 단위 사례를 분리해, 경력 흐름은 짧게 읽고 대표 프로젝트는 깊게 볼 수 있도록 구성했습니다.</p>
       </div>
       <div class="timeline">
         <article class="timeline-item">
@@ -684,7 +750,6 @@
     <section class="section" id="projects">
       <div class="section-heading">
         <h2>Representative Projects</h2>
-        <p>모든 프로젝트를 길게 나열하기보다, 신뢰를 가장 잘 만드는 대표 사례 3개를 먼저 배치했습니다.</p>
       </div>
       <div class="project-grid">
         <article class="project-card">
@@ -736,7 +801,6 @@
     <section class="section" id="stack">
       <div class="section-heading">
         <h2>Tech Stack</h2>
-        <p>기술 이름을 길게 나열하기보다 역할 기준으로 묶었습니다.</p>
       </div>
       <div class="section-card">
         <div class="stack-grid">
@@ -803,7 +867,6 @@
     <section class="section" id="credibility">
       <div class="section-heading">
         <h2>Education · Certifications · Awards</h2>
-        <p>이력 보강 요소는 하단에 간결하게 배치했습니다.</p>
       </div>
       <div class="info-grid">
         <article class="info-card">
