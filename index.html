@@ -232,7 +232,8 @@
     .point-list,
     .mini-list,
     .case-list,
-    .bullet-list {
+    .bullet-list,
+    .project-points {
       margin: 0;
       padding-left: 18px;
       color: #414141;
@@ -349,7 +350,6 @@
     }
 
     .timeline-item,
-    .project-card,
     .stack-group,
     .info-card {
       padding: 22px;
@@ -411,20 +411,51 @@
 
     .bullet-list li+li,
     .case-list li+li,
-    .mini-list li+li {
+    .mini-list li+li,
+    .project-points li+li {
       margin-top: 8px;
     }
 
     .project-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: 1fr;
       align-items: stretch;
     }
 
     .project-card {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      height: 100%;
+      display: grid;
+      grid-template-columns: minmax(240px, 280px) minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
+      padding: 24px;
+      height: auto;
+    }
+
+    .project-side {
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .project-main {
+      display: grid;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .project-card h3 {
+      font-size: 1.18rem;
+      line-height: 1.35;
+    }
+
+    .project-meta {
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    .project-summary {
+      margin: 0;
+      color: #434343;
+      font-size: 0.96rem;
     }
 
     .eyebrow,
@@ -440,13 +471,8 @@
       font-weight: 800;
     }
 
-    .project-meta {
-      margin: -2px 0 0;
-    }
-
     .result-box,
     .case-result {
-      margin-top: auto;
       padding: 14px;
       border-radius: 12px;
       background: var(--primary-soft);
@@ -454,6 +480,10 @@
       font-size: 0.92rem;
       color: #6a2e23;
       font-weight: 700;
+    }
+
+    .result-box {
+      margin-top: 0;
     }
 
     .case-study-grid {
@@ -471,6 +501,8 @@
     .case-thumb {
       display: grid;
       gap: 10px;
+      height: 100%;
+      align-content: center;
     }
 
     .case-thumb-frame {
@@ -543,6 +575,21 @@
       color: #333333;
     }
 
+
+    .case-learned {
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+    }
+
+    .case-learned p {
+      margin: 6px 0 0;
+      color: #454545;
+      font-size: 0.92rem;
+      line-height: 1.58;
+    }
+
     .case-links {
       display: flex;
       flex-wrap: wrap;
@@ -609,7 +656,6 @@
     @media (max-width: 1100px) {
 
       .proof-grid,
-      .project-grid,
       .stack-grid,
       .info-grid,
       .case-key-grid {
@@ -635,6 +681,11 @@
           "detail"
           "side";
       }
+
+      .project-card {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
     }
 
     @media (max-width: 720px) {
@@ -656,7 +707,6 @@
 
       .proof-grid,
       .hero-detail-grid,
-      .project-grid,
       .stack-grid,
       .info-grid,
       .case-study-card,
@@ -731,6 +781,7 @@
         border: 1px solid #d0d0d0;
       }
 
+      .project-card,
       .case-study-card,
       .case-key-grid {
         grid-template-columns: 1fr;
@@ -856,6 +907,69 @@
       </div>
     </section>
 
+    <section class="section" id="projects">
+      <div class="section-heading">
+        <h2>Representative Projects</h2>
+      </div>
+      <div class="project-grid">
+        <article class="project-card">
+          <div class="project-side">
+            <span class="eyebrow">Internal Automation</span>
+            <h3>인사급여 시스템 디지털 전환</h3>
+            <div class="project-meta">사내 프로젝트 · 2022.01 – 2022.06<br />2023.01 – 2023.04</div>
+          </div>
+          <div class="project-main">
+            <p class="project-summary">수기 중심으로 운영되던 인사·급여 업무를 웹 시스템으로 전환했습니다. 직원 등록, 급여 항목 관리, 월 급여 계산, Excel 급여명세서 생성,
+              메일 발송까지 전 과정을 시스템화했습니다.</p>
+            <ul class="project-points">
+              <li>실무자 업무 흐름을 기준으로 화면 · 기능 · 데이터 구조 정리</li>
+              <li>Apache POI 기반 Excel 생성, JavaMail 기반 명세서 발송 자동화</li>
+              <li>기존 Oracle/PLSQL 로직을 분석해 MariaDB 환경에 맞게 재구성</li>
+              <li>후속 단계에서 Spring Boot 전환과 Vue 적용으로 구조 개선</li>
+            </ul>
+            <div class="result-box">약 2주 걸리던 급여 처리 업무를 시스템 기반으로 단축하고, 전체 직원 대상 급여명세서 발송을 10분 이내 수준으로 개선</div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-side">
+            <span class="eyebrow">Operation Development</span>
+            <h3>롯데캐피탈 여신업무 시스템 운영 개발</h3>
+            <div class="project-meta">2024.05 – 2025.04</div>
+          </div>
+          <div class="project-main">
+            <p class="project-summary">신용대출, 자동차담보대출, 전세자금대출, 기업대출 등 여신업무 시스템에서 기능 개선과 정책 반영을 수행했습니다. 화면, 쿼리, DTO, 메타,
+              리포트, 테스트와 운영 반영까지 연결해 다뤘습니다.</p>
+            <ul class="project-points">
+              <li>조회 조건 수정, 컬럼 추가, 입력 제어, 팝업 개발 등 운영성 개선</li>
+              <li>약관 · 상품설명서 · 계약서 등 전자문서 및 전자리포트 변경사항 반영</li>
+              <li>테이블 관계와 업무 흐름을 기준으로 쿼리 보완 및 데이터 매핑 조정</li>
+              <li>1년간 40여 건의 SR을 처리하며 화면–데이터–리포트 전달 구조를 안정적으로 연결</li>
+            </ul>
+            <div class="result-box">운영 중인 여신업무 시스템에서 다수의 요청과 정책 변경사항을 안정적으로 반영한 사례</div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-side">
+            <span class="eyebrow">Legacy Modernization</span>
+            <h3>도이치파이낸셜 화면 전환 및 고도화</h3>
+            <div class="project-meta">2023.04 – 2024.02</div>
+          </div>
+          <div class="project-main">
+            <p class="project-summary">기존 IE 중심 금융 업무 시스템을 WebSquare 기반 구조로 전환하며, 화면 기능 정합성과 브라우저 호환성을 보완한 프로젝트입니다.</p>
+            <ul class="project-points">
+              <li>전체 전환 대상 약 800본 중 약 100본 내외의 화면 개발 담당</li>
+              <li>조회, 등록, 팝업, 그리드, 파일 업로드, 리포트 호출 기능 구현</li>
+              <li>동적 팝업 호출 구조 분석 및 환경에 맞는 로직 재구성</li>
+              <li>신규 투입 인력 온보딩과 작업 기준 가이드 제공</li>
+            </ul>
+            <div class="result-box">대출 로직(DSR 시뮬레이션) 실행 속도를 3분에서 1분으로 개선하고, 다양한 브라우저에서 사용할 수 있도록 구조 보완</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
     <section class="section" id="career">
       <div class="section-heading">
         <h2>Career Snapshot</h2>
@@ -892,57 +1006,6 @@
             <li>RGB 기반 판정 구조 분석과 기능 이슈 정리</li>
             <li>VBA 매크로를 활용한 연구보고서 작성 자동화</li>
           </ul>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="projects">
-      <div class="section-heading">
-        <h2>Representative Projects</h2>
-      </div>
-      <div class="project-grid">
-        <article class="project-card">
-          <span class="eyebrow">Internal Automation</span>
-          <h3>인사급여 시스템 디지털 전환</h3>
-          <div class="project-meta">사내 프로젝트 · 2022.01 – 2022.06 /<br /> 2023.01 – 2023.04</div>
-          <p>수기 중심으로 운영되던 인사·급여 업무를 웹 시스템으로 전환했습니다. 직원 등록, 급여 항목 관리, 월 급여 계산, Excel 급여명세서 생성, 메일 발송까지 전 과정을 시스템화했습니다.
-          </p>
-          <ul class="bullet-list">
-            <li>실무자 업무 흐름을 기준으로 화면 · 기능 · 데이터 구조 정리</li>
-            <li>Apache POI 기반 Excel 생성, JavaMail 기반 명세서 발송 자동화</li>
-            <li>기존 Oracle/PLSQL 로직을 분석해 MariaDB 환경에 맞게 재구성</li>
-            <li>후속 단계에서 Spring Boot 전환과 Vue 적용으로 구조 개선</li>
-          </ul>
-          <div class="result-box">약 2주 걸리던 급여 처리 업무를 시스템 기반으로 단축하고, 전체 직원 대상 급여명세서 발송을 10분 이내 수준으로 개선</div>
-        </article>
-
-        <article class="project-card">
-          <span class="eyebrow">Operation Development</span>
-          <h3>롯데캐피탈 여신업무 시스템 운영 개발</h3>
-          <div class="project-meta">2024.05 – 2025.04</div>
-          <p>신용대출, 자동차담보대출, 전세자금대출, 기업대출 등 여신업무 시스템에서 기능 개선과 정책 반영을 수행했습니다. 화면, 쿼리, DTO, 메타, 리포트, 테스트와 운영 반영까지 연결해
-            다뤘습니다.</p>
-          <ul class="bullet-list">
-            <li>조회 조건 수정, 컬럼 추가, 입력 제어, 팝업 개발 등 운영성 개선</li>
-            <li>약관 · 상품설명서 · 계약서 등 전자문서 및 전자리포트 변경사항 반영</li>
-            <li>테이블 관계와 업무 흐름을 기준으로 쿼리 보완 및 데이터 매핑 조정</li>
-            <li>1년간 40여 건의 SR을 처리하며 화면–데이터–리포트 전달 구조를 안정적으로 연결</li>
-          </ul>
-          <div class="result-box">운영 중인 여신업무 시스템에서 다수의 요청과 정책 변경사항을 안정적으로 반영한 사례</div>
-        </article>
-
-        <article class="project-card">
-          <span class="eyebrow">Legacy Modernization</span>
-          <h3>도이치파이낸셜 화면 전환 및 고도화</h3>
-          <div class="project-meta">2023.04 – 2024.02</div>
-          <p>기존 IE 중심 금융 업무 시스템을 WebSquare 기반 구조로 전환하며, 화면 기능 정합성과 브라우저 호환성을 보완한 프로젝트입니다.</p>
-          <ul class="bullet-list">
-            <li>전체 전환 대상 약 800본 중 약 100본 내외의 화면 개발 담당</li>
-            <li>조회, 등록, 팝업, 그리드, 파일 업로드, 리포트 호출 기능 구현</li>
-            <li>동적 팝업 호출 구조 분석 및 환경에 맞는 로직 재구성</li>
-            <li>신규 투입 인력 온보딩과 작업 기준 가이드 제공</li>
-          </ul>
-          <div class="result-box">대출 로직(DSR 시뮬레이션) 실행 속도를 3분에서 1분으로 개선하고, 다양한 브라우저에서 사용할 수 있도록 구조 보완</div>
         </article>
       </div>
     </section>
@@ -986,8 +1049,14 @@
               <li>구현뿐 아니라 기존 구조를 이해하고 설명 가능한 형태로 재구성한 사례</li>
             </ul>
             <div class="case-hook">레거시 조회 기능을 빠르게 이해하고 수정 범위를 좁히기 위해 요청 흐름과 계층 책임을 문서화</div>
+            <div class="case-learned">
+              <span class="case-mini-label">What I Learned</span>
+              <p>레거시 시스템에서는 코드를 바로 고치는 것보다, 먼저 요청 흐름과 계층 책임을 설명 가능한 형태로 정리하는 편이 수정 범위를 줄이는 데 더 효과적이었습니다. 구조를 이해한 뒤의 변경이
+                속도보다 실수 방지 측면에서 더 큰 차이를 만든다는 점을 다시 확인했습니다.</p>
+            </div>
             <div class="case-links">
-              <a class="case-link" href="portfolio_case_assets/legacy_case.pdf" target="_blank" rel="noopener">PDF 보기</a>
+              <a class="case-link" href="portfolio_case_assets/legacy_case.pdf" target="_blank" rel="noopener">PDF
+                보기</a>
             </div>
           </div>
         </article>
@@ -1027,6 +1096,11 @@
               <li>개발 시점 기준 안정성과 호환성을 고려해 Vue 2.6.14 선택</li>
             </ul>
             <div class="case-hook">기존 JSP 프로젝트를 전면 교체하지 않고 Vue를 별도 결합해 화면 계층을 점진 도입</div>
+            <div class="case-learned">
+              <span class="case-mini-label">What I Learned</span>
+              <p>기존 시스템 개선에서는 기술적으로 더 최신인 선택보다, 운영 환경 안에서 안전하게 붙일 수 있는 방식이 더 중요할 수 있음을 정리했습니다. 전면 교체보다 점진 도입이 실제 일정과 조직
+                조건 안에서 더 현실적인 개선 전략이 될 수 있다는 기준을 얻었습니다.</p>
+            </div>
             <div class="case-links">
               <a class="case-link" href="portfolio_case_assets/vue_case.pdf" target="_blank" rel="noopener">PDF 보기</a>
             </div>
@@ -1046,7 +1120,6 @@
               <span class="case-meta">Spring MVC · Apache POI · SXSSFWorkbook</span>
             </div>
             <h3>대용량 엑셀 다운로드 기능 구현 및 성능 검증</h3>
-            <!-- <div class="case-hook">엑셀 다운로드 기능을 구현하고 heap 조건별 안정 구간까지 함께 검증한 사례</div> -->
             <p class="case-summary">파일명 설정, HTTP 헤더, 시트 작성, 출력 스트림 처리를 역할별로 분리하고, 데이터가 커질 때의 한계를 실험으로 확인했습니다.</p>
             <div class="case-key-grid">
               <div class="case-key-item">
@@ -1068,8 +1141,13 @@
               <li>2GB, 8GB, 12GB heap 조건에서 안정 구간과 실패 시점을 비교 검증</li>
               <li>구현 이후 운영 환경에서의 한계와 개선 방향까지 정리</li>
             </ul>
-            <div class="case-result">2GB heap에서는 약 80,000행, 8GB에서는 약 160,000행, 12GB에서는 약 250,000행까지 안정적으로 처리 가능한 구간을
-              확인</div>
+            <div class="case-result">2GB heap에서는 약 80,000행, 8GB에서는 약 160,000행, 12GB에서는 약 250,000행까지 안정적으로 처리 가능한 구간을 확인
+            </div>
+            <div class="case-learned">
+              <span class="case-mini-label">What I Learned</span>
+              <p>기능 구현만으로는 충분하지 않고, 운영 환경에서 어디까지 버틸 수 있는지를 함께 검증해야 실제로 사용할 수 있는 기능이 된다는 점을 확인했습니다. 대용량 처리에서는 코드 구조만큼이나
+                메모리 조건과 실패 구간을 함께 아는 것이 중요했습니다.</p>
+            </div>
             <div class="case-links">
               <a class="case-link" href="portfolio_case_assets/excel_case.pdf" target="_blank" rel="noopener">PDF 보기</a>
             </div>
