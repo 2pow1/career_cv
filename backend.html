@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>이승원 | Java/Spring Backend Developer</title>
+  <style>
+    :root {
+      --bg: #f5f5f3;
+      --bg-dark: #2F3545;
+      --surface: #ffffff;
+      --surface-soft: #f9f9f7;
+      --text: #1f1f1f;
+      --text-white: #ffffff;
+      --muted: #676767;
+      --line: #ddddda;
+      --line-strong: #c8c8c3;
+      --primary: #e6513d;
+      --primary-soft: #fff2ef;
+      --max-width: 1140px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --shadow: 0 12px 40px rgba(20, 20, 20, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.68;
+      letter-spacing: -0.01em;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container,
+    .topbar-inner {
+      width: min(calc(100% - 40px), var(--max-width));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(245, 245, 243, 0.88);
+      border-bottom: 1px solid rgba(221, 221, 218, 0.85);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 68px;
+    }
+
+    .brand {
+      font-size: 0.98rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .nav a:hover {
+      color: var(--primary);
+    }
+
+    .hero {
+      padding: 52px 0 12px;
+      display: grid;
+      grid-template-columns: minmax(0, 2.05fr) minmax(250px, 0.75fr);
+      grid-template-areas:
+        "main side"
+        "detail side";
+      gap: 20px;
+      align-items: start;
+    }
+
+    .card,
+    .section-card,
+    .timeline-item,
+    .project-card,
+    .case-study-card,
+    .stack-group,
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main,
+    .hero-side,
+    .hero-detail {
+      padding: 28px;
+    }
+
+    .hero-main {
+      grid-area: main;
+    }
+
+    .hero-side {
+      grid-area: side;
+      display: grid;
+      gap: 18px;
+      height: fit-content;
+    }
+
+    .hero-detail {
+      grid-area: detail;
+      display: grid;
+      gap: 14px;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .hero h1 {
+      margin: 14px 0 8px;
+      font-size: clamp(1.84rem, 2.95vw, 2.58rem);
+      line-height: 1.08;
+      letter-spacing: -0.06em;
+      word-break: keep-all;
+    }
+
+    .hero-role {
+      margin: 0;
+      font-size: 1.06rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .hero-summary {
+      margin: 18px 0 0;
+      max-width: 730px;
+      color: #3f3f3f;
+      font-size: 0.97rem;
+    }
+
+    .hero-summary p {
+      margin: 0;
+    }
+
+    .proof-grid {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .proof-item {
+      padding: 14px;
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+    }
+
+    .proof-label,
+    .contact-label,
+    .mini-label,
+    .meta-label,
+    .case-mini-label {
+      display: block;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .proof-label {
+      margin-bottom: 6px;
+    }
+
+    .proof-item strong {
+      display: block;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+    }
+
+    .side-block+.side-block {
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .side-title {
+      margin: 0 0 12px;
+      font-size: 0.94rem;
+      color: var(--muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .contact-list,
+    .point-list,
+    .mini-list,
+    .case-list,
+    .bullet-list,
+    .project-points {
+      margin: 0;
+      padding-left: 18px;
+      color: #414141;
+    }
+
+    .contact-list,
+    .point-list,
+    .mini-list {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .contact-list li,
+    .point-list li,
+    .mini-list li {
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .contact-list li:last-child,
+    .point-list li:last-child,
+    .mini-list li:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .contact-label,
+    .mini-label {
+      margin-bottom: 4px;
+    }
+
+    .contact-value,
+    .mini-value {
+      font-size: 0.96rem;
+      font-weight: 700;
+      word-break: break-all;
+    }
+
+    .hero-detail-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-detail h2,
+    .section-heading h2 {
+      margin: 0;
+      letter-spacing: -0.05em;
+    }
+
+    .hero-detail h2 {
+      font-size: 1.08rem;
+    }
+
+    .hero-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .hero-detail-item {
+      padding: 14px 16px;
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+    }
+
+    .hero-detail-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-detail-item p {
+      margin: 0;
+      color: #454545;
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .section {
+      padding: 8px 0 0;
+    }
+
+    .section+.section {
+      margin-top: 28px;
+    }
+
+    .section-heading {
+      display: block;
+      margin-bottom: 18px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(1.58rem, 3vw, 2.04rem);
+    }
+
+    .section-card {
+      padding: 28px;
+    }
+
+    .timeline,
+    .project-grid,
+    .stack-grid,
+    .info-grid,
+    .case-study-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-item,
+    .stack-group,
+    .info-card {
+      padding: 22px;
+    }
+
+    .timeline-item,
+    .project-card,
+    .stack-group,
+    .info-card,
+    .case-study-card {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .timeline-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: start;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .timeline-top h3,
+    .project-card h3,
+    .stack-group h3,
+    .info-card h3,
+    .case-body h3 {
+      margin: 0;
+      letter-spacing: -0.03em;
+    }
+
+    .timeline-top h3 {
+      font-size: 1.16rem;
+      margin-bottom: 4px;
+    }
+
+    .timeline-role,
+    .timeline-date,
+    .project-meta,
+    .case-meta {
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .timeline-date {
+      white-space: nowrap;
+    }
+
+    .timeline-desc,
+    .project-card p,
+    .info-card p,
+    .case-summary {
+      margin: 0;
+      color: #434343;
+      font-size: 0.96rem;
+    }
+
+    .bullet-list li+li,
+    .case-list li+li,
+    .mini-list li+li,
+    .project-points li+li {
+      margin-top: 8px;
+    }
+
+    .project-grid {
+      grid-template-columns: 1fr;
+      align-items: stretch;
+    }
+
+    .project-card {
+      display: grid;
+      grid-template-columns: minmax(240px, 280px) minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
+      padding: 24px;
+      height: auto;
+    }
+
+    .project-side {
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .project-main {
+      display: grid;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .project-card h3 {
+      font-size: 1.18rem;
+      line-height: 1.35;
+    }
+
+    .project-meta {
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    .project-summary {
+      margin: 0;
+      color: #434343;
+      font-size: 0.96rem;
+    }
+
+    .eyebrow,
+    .case-label {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .result-box,
+    .case-result {
+      padding: 14px;
+      border-radius: 12px;
+      background: var(--primary-soft);
+      border: 1px solid #ffd8d2;
+      font-size: 0.92rem;
+      color: #6a2e23;
+      font-weight: 700;
+    }
+
+    .result-box {
+      margin-top: 0;
+    }
+
+    .case-study-grid {
+      gap: 18px;
+    }
+
+    .case-study-card {
+      display: grid;
+      grid-template-columns: minmax(260px, 312px) minmax(0, 1fr);
+      gap: 22px;
+      padding: 22px;
+      align-items: start;
+    }
+
+    .case-thumb {
+      display: grid;
+      gap: 10px;
+      height: 100%;
+      align-content: center;
+    }
+
+    .case-thumb-frame {
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: var(--surface-soft);
+    }
+
+    .case-thumb-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      aspect-ratio: 4 / 5;
+    }
+
+    .case-caption {
+      color: var(--muted);
+      font-size: 0.83rem;
+      line-height: 1.48;
+    }
+
+    .case-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .case-body {
+      display: grid;
+      gap: 14px;
+    }
+
+    .case-body h3 {
+      font-size: 1.16rem;
+    }
+
+    .case-hook {
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--primary-soft);
+      border: 1px solid #ffd8d2;
+      color: #6a2e23;
+      font-size: 0.92rem;
+      font-weight: 700;
+      line-height: 1.52;
+    }
+
+    .case-key-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .case-key-item {
+      padding: 12px 13px;
+      border-radius: 12px;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+    }
+
+    .case-key-item strong {
+      display: block;
+      margin: 6px 0 0;
+      font-size: 0.91rem;
+      line-height: 1.45;
+      color: #333333;
+    }
+
+
+    .case-learned {
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+    }
+
+    .case-learned p {
+      margin: 6px 0 0;
+      color: #454545;
+      font-size: 0.92rem;
+      line-height: 1.58;
+    }
+
+    .case-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .case-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      background: var(--bg-dark);
+      color: var(--text-white);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .case-link:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .stack-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .chip-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      background: var(--surface-soft);
+      font-size: 0.87rem;
+      font-weight: 700;
+    }
+
+    .work-style {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: #454545;
+      font-size: 0.95rem;
+    }
+
+    .info-grid {
+      grid-template-columns: 1.1fr 0.9fr 0.9fr;
+    }
+
+    .footer {
+      padding: 30px 0 42px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 1100px) {
+
+      .proof-grid,
+      .stack-grid,
+      .info-grid,
+      .case-key-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .case-study-card {
+        grid-template-columns: 280px minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 920px) {
+
+      .container,
+      .topbar-inner {
+        width: min(calc(100% - 28px), var(--max-width));
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "main"
+          "detail"
+          "side";
+      }
+
+      .project-card {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        display: none;
+      }
+
+      .hero-main,
+      .hero-side,
+      .hero-detail,
+      .section-card,
+      .timeline-item,
+      .project-card,
+      .case-study-card,
+      .stack-group,
+      .info-card {
+        padding: 20px;
+      }
+
+      .proof-grid,
+      .hero-detail-grid,
+      .stack-grid,
+      .info-grid,
+      .case-study-card,
+      .case-key-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .case-study-card {
+        gap: 18px;
+      }
+
+      .case-thumb-frame img {
+        aspect-ratio: 16 / 10;
+      }
+
+      .topbar-inner {
+        min-height: 58px;
+      }
+
+      .hero {
+        padding-top: 34px;
+      }
+    }
+
+    @page {
+      size: A4;
+      margin: 14mm;
+    }
+
+    @media print {
+      html {
+        scroll-behavior: auto;
+      }
+
+      body {
+        background: #ffffff;
+        color: #111111;
+        font-size: 11pt;
+        line-height: 1.55;
+      }
+
+      .topbar {
+        position: static;
+        background: #ffffff;
+        border-bottom: 1px solid #cccccc;
+        backdrop-filter: none;
+      }
+
+      .container,
+      .topbar-inner {
+        width: 100%;
+        max-width: none;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 20px;
+        gap: 14px;
+      }
+
+      .card,
+      .section-card,
+      .timeline-item,
+      .project-card,
+      .case-study-card,
+      .stack-group,
+      .info-card {
+        box-shadow: none;
+        border: 1px solid #d0d0d0;
+      }
+
+      .project-card,
+      .case-study-card,
+      .case-key-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .case-thumb-frame img {
+        aspect-ratio: auto;
+      }
+
+      .footer {
+        padding-bottom: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">이승원 · Java/Spring Backend Developer</div>
+      <nav class="nav">
+        <a href="#about">소개</a>
+        <a href="#career">경력</a>
+        <a href="#projects">Projects</a>
+        <a href="#case-studies">Case Studies</a>
+        <a href="#stack">기술 스택</a>
+        <a href="#credibility">이력/자격</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" id="about">
+      <div class="card hero-main">
+        <span class="hero-kicker">4년 차 · 운영 시스템 백엔드 경험</span>
+        <h1>운영 시스템 백엔드 개발자</h1>
+        <p class="hero-role">Java / Spring Backend Developer</p>
+        <div class="hero-summary">
+          <p>Java, Spring, SQL 기반으로 내부 업무 시스템을 분석하고, 운영 요청을 기능 개선과 데이터 처리 구조로 연결해왔습니다. 인사급여 시스템 디지털 전환, 대용량 엑셀 다운로드,
+            레거시 구조 문서화, 금융권 SR 유지보수 경험을 바탕으로 기존 시스템을 인수하고 안정적으로 개선하는 데 강점이 있습니다.</p>
+        </div>
+        <div class="proof-grid">
+          <div class="proof-item">
+            <span class="proof-label">도메인</span>
+            <strong>내부 운영 시스템 · 업무 자동화</strong>
+          </div>
+          <div class="proof-item">
+            <span class="proof-label">실무 범위</span>
+            <strong>백엔드 · DB · 파일 생성 · 운영 요청 처리</strong>
+          </div>
+          <div class="proof-item">
+            <span class="proof-label">강점</span>
+            <strong>레거시 인수 · 구조 분석 · 점진 개선</strong>
+          </div>
+        </div>
+      </div>
+
+      <aside class="card hero-side">
+        <div class="side-block">
+          <p class="side-title">Profile</p>
+          <ul class="contact-list">
+            <li>
+              <span class="contact-label">Phone</span>
+              <span class="contact-value">010-3212-8076</span>
+            </li>
+            <li>
+              <span class="contact-label">Email</span>
+              <span class="contact-value"><a href="mailto:loboson395@naver.com">loboson395@naver.com</a></span>
+            </li>
+            <li>
+              <span class="contact-label">Location</span>
+              <span class="contact-value">서울특별시 은평구</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="side-block">
+          <p class="side-title">Quick Summary</p>
+          <ul class="point-list">
+            <li>수기 업무를 웹 기반 시스템과 자동화 흐름으로 전환</li>
+            <li>운영 요청을 분석해 DB, 백엔드, 리포트 변경으로 반영</li>
+            <li>레거시 구조를 문서화하고 안전하게 점진 개선</li>
+          </ul>
+        </div>
+
+        <div class="side-block">
+          <p class="side-title">Credentials</p>
+          <ul class="mini-list">
+            <li>
+              <span class="mini-label">자격</span>
+              <span class="mini-value">정보처리기사 · SQLD · NCPA</span>
+            </li>
+            <li>
+              <span class="mini-label">수상</span>
+              <span class="mini-value">Google Cloud Skill Badge 15개 · NIPA-NAVER Cloud 부트캠프 최우수</span>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <div class="card hero-detail">
+        <div class="hero-detail-head">
+          <h2>Selected Experience</h2>
+        </div>
+        <div class="hero-detail-grid">
+          <article class="hero-detail-item">
+            <strong>인사급여 시스템 DX</strong>
+            <p>수기 급여 업무를 직원 등록, 급여 계산, 엑셀 생성, 메일 발송 자동화 흐름으로 전환</p>
+          </article>
+          <article class="hero-detail-item">
+            <strong>대용량 엑셀 다운로드</strong>
+            <p>Spring MVC와 Apache POI 기반 파일 생성 구조를 정리하고 heap 조건별 안정 구간 검증</p>
+          </article>
+          <article class="hero-detail-item">
+            <strong>레거시 구조 분석</strong>
+            <p>JSP, Service, Mapper, DB 흐름을 문서화해 수정 범위와 데이터 흐름을 빠르게 파악 가능하게 정리</p>
+          </article>
+          <article class="hero-detail-item">
+            <strong>운영 SR 유지보수</strong>
+            <p>현업 요청을 화면, SQL, 데이터 흐름 기준으로 재현하고 기능 개선과 정책 변경사항 반영</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="section-heading">
+        <h2>Representative Projects</h2>
+      </div>
+      <div class="project-grid">
+        <article class="project-card">
+          <div class="project-side">
+            <span class="eyebrow">Internal Automation</span>
+            <h3>인사급여 시스템 디지털 전환</h3>
+            <div class="project-meta">사내 프로젝트 · 2022.01 – 2022.06<br />2023.01 – 2023.04</div>
+          </div>
+          <div class="project-main">
+            <p class="project-summary">수기 중심으로 운영되던 인사·급여 업무를 웹 시스템으로 전환했습니다. 직원 등록, 급여 항목 관리, 월 급여 계산, Excel 급여명세서 생성,
+              메일 발송까지 전 과정을 시스템화했습니다.</p>
+            <ul class="project-points">
+              <li>실무자 업무 흐름을 기준으로 화면 · 기능 · 데이터 구조 정리</li>
+              <li>Apache POI 기반 Excel 생성, JavaMail 기반 명세서 발송 자동화</li>
+              <li>기존 Oracle/PLSQL 로직을 분석해 MariaDB 환경에 맞게 재구성</li>
+              <li>후속 단계에서 Spring Boot 전환과 Vue 적용으로 구조 개선</li>
+            </ul>
+            <div class="result-box">약 2주 걸리던 급여 처리 업무를 시스템 기반으로 단축하고, 전체 직원 대상 급여명세서 발송을 10분 이내 수준으로 개선</div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-side">
+            <span class="eyebrow">Operation Development</span>
+            <h3>롯데캐피탈 업무 시스템 운영 개발</h3>
+            <div class="project-meta">2024.05 – 2025.04</div>
+          </div>
+          <div class="project-main">
+            <p class="project-summary">운영 중인 업무 시스템에서 현업 SR을 받아 기능 개선과 정책 변경사항을 반영했습니다. 화면, Oracle SQL, DTO, 메타, 리포트,
+              테스트와 운영 반영까지 이어지는 흐름을 다뤘습니다.</p>
+            <ul class="project-points">
+              <li>조회 조건 수정, 컬럼 추가, 입력 제어, 팝업 개발 등 운영성 개선</li>
+              <li>약관 · 상품설명서 · 계약서 등 전자문서 및 리포트 변경사항 반영</li>
+              <li>테이블 관계와 업무 흐름을 기준으로 쿼리 보완 및 데이터 매핑 조정</li>
+              <li>1년간 40여 건의 SR을 처리하며 화면–데이터–리포트 전달 구조를 안정적으로 연결</li>
+            </ul>
+            <div class="result-box">운영 중인 업무 시스템에서 다수의 요청과 정책 변경사항을 안정적으로 반영한 사례</div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-side">
+            <span class="eyebrow">Legacy Modernization</span>
+            <h3>도이치파이낸셜 화면 전환 및 고도화</h3>
+            <div class="project-meta">2023.04 – 2024.02</div>
+          </div>
+          <div class="project-main">
+            <p class="project-summary">기존 IE 중심 레거시 업무 시스템을 WebSquare 기반 구조로 전환하며, 화면 기능 정합성과 브라우저 호환성을 보완한 프로젝트입니다.</p>
+            <ul class="project-points">
+              <li>전체 전환 대상 약 800본 중 약 100본 내외의 화면 개발 담당</li>
+              <li>조회, 등록, 팝업, 그리드, 파일 업로드, 리포트 호출 기능 구현</li>
+              <li>동적 팝업 호출 구조 분석 및 환경에 맞는 로직 재구성</li>
+              <li>신규 투입 인력 온보딩과 작업 기준 가이드 제공</li>
+            </ul>
+            <div class="result-box">대출 로직(DSR 시뮬레이션) 실행 속도를 3분에서 1분으로 개선하고, 다양한 브라우저에서 사용할 수 있도록 구조 보완</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="career">
+      <div class="section-heading">
+        <h2>Career Snapshot</h2>
+      </div>
+      <div class="timeline">
+        <article class="timeline-item">
+          <div class="timeline-top">
+            <div>
+              <h3>테크블루제닉(주)</h3>
+              <div class="timeline-role">시스템개발부 · 대리 · Full-stack Developer</div>
+            </div>
+            <div class="timeline-date">2022.01 – 2025.05</div>
+          </div>
+          <p class="timeline-desc">업무 시스템 고도화, 운영성 개발, 리포트 반영, 데이터 구조 조정, 테스트와 배포 반영 수행</p>
+          <ul class="bullet-list">
+            <li>롯데캐피탈: 운영 업무 시스템 기능 개선 및 SR 반영</li>
+            <li>도이치파이낸셜: 레거시 시스템 전환 및 브라우저 호환성 개선</li>
+            <li>KB증권: 법인 고객 대상 업무 화면 개발</li>
+            <li>사내 프로젝트: 인사급여 업무 디지털 전환 및 자동화</li>
+          </ul>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-top">
+            <div>
+              <h3>주식회사 이노메디</h3>
+              <div class="timeline-role">기술개발팀 · 연구원 · Software Engineer</div>
+            </div>
+            <div class="timeline-date">2021.06 – 2021.12</div>
+          </div>
+          <p class="timeline-desc">의료용 검사 앱과 검사키트 운영 과정에서 정확도 검증, 이슈 분석, 반복 업무 자동화, 기술 제약사항 문서화 수행</p>
+          <ul class="bullet-list">
+            <li>검사 결과 정확도 향상을 위한 반복 테스트 설계 및 비교 분석</li>
+            <li>RGB 기반 판정 구조 분석과 기능 이슈 정리</li>
+            <li>VBA 매크로를 활용한 연구보고서 작성 자동화</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="case-studies">
+      <div class="section-heading">
+        <h2>Technical Case Studies</h2>
+      </div>
+      <div class="case-study-grid">
+        <article class="case-study-card">
+          <div class="case-thumb">
+            <div class="case-thumb-frame">
+              <img src="portfolio_case_assets/legacy_case.png" alt="레거시 조회 기능 구조 분석 문서 대표 이미지" />
+            </div>
+            <div class="case-caption">요청 처리 흐름과 계층 분리를 중심으로 정리한 문서</div>
+          </div>
+          <div class="case-body">
+            <div class="case-header">
+              <span class="case-label">Structure Analysis</span>
+              <span class="case-meta">JSP · Spring · MyBatis</span>
+            </div>
+            <h3>레거시 조회 기능의 구조 분석 및 문서화</h3>
+            <p class="case-summary">기존 조회 기능을 설명 가능한 형태로 재정리해 기능 변경이나 오류 추적 시 어디를 먼저 봐야 하는지 빠르게 파악할 수 있도록 구성했습니다.</p>
+            <div class="case-key-grid">
+              <div class="case-key-item">
+                <span class="case-mini-label">문제</span>
+                <strong>레거시 기능의 구조와 수정 범위를 한눈에 파악하기 어려운 상태</strong>
+              </div>
+              <div class="case-key-item">
+                <span class="case-mini-label">접근</span>
+                <strong>JSP → Service → XML Mapper 흐름과 데이터 전달 구조를 계층별로 문서화</strong>
+              </div>
+              <div class="case-key-item">
+                <span class="case-mini-label">결과</span>
+                <strong>기능 흐름 추적과 수정 포인트 파악이 쉬운 형태로 재정리</strong>
+              </div>
+            </div>
+            <ul class="case-list">
+              <li>화면 입력, 서버 로직, SQL 실행, 화면 출력의 책임을 계층별로 분리해 설명</li>
+              <li>사용자 입력 → JSP 요청 전송 → Service 파라미터 처리 → XML Mapper SQL 실행 → DB 조회 → 결과 반환 → JSP 렌더링 흐름 정리</li>
+              <li>구현뿐 아니라 기존 구조를 이해하고 설명 가능한 형태로 재구성한 사례</li>
+            </ul>
+            <div class="case-hook">레거시 조회 기능을 빠르게 이해하고 수정 범위를 좁히기 위해 요청 흐름과 계층 책임을 문서화</div>
+            <div class="case-learned">
+              <span class="case-mini-label">What I Learned</span>
+              <p>레거시 시스템에서는 코드를 바로 고치는 것보다, 먼저 요청 흐름과 계층 책임을 설명 가능한 형태로 정리하는 편이 수정 범위를 줄이는 데 더 효과적이었습니다. 구조를 이해한 뒤의 변경이
+                속도보다 실수 방지 측면에서 더 큰 차이를 만든다는 점을 다시 확인했습니다.</p>
+            </div>
+            <div class="case-links">
+              <a class="case-link" href="portfolio_case_assets/legacy_case.pdf" target="_blank" rel="noopener">PDF
+                보기</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="case-study-card">
+          <div class="case-thumb">
+            <div class="case-thumb-frame">
+              <img src="portfolio_case_assets/vue_case.png" alt="기존 JSP 프로젝트에 Vue 점진 도입 사례 대표 이미지" />
+            </div>
+            <div class="case-caption">기존 프로젝트를 유지한 채 Vue 빌드 결과물과 라우팅 흐름을 연결한 구조</div>
+          </div>
+          <div class="case-body">
+            <div class="case-header">
+              <span class="case-label">Incremental Adoption</span>
+              <span class="case-meta">eGov · JSP · Vue · Axios</span>
+            </div>
+            <h3>기존 JSP 프로젝트에 Vue 점진 도입</h3>
+            <p class="case-summary">백엔드 구조와 서비스 호출 방식은 유지한 채 프론트엔드만 단계적으로 분리해, 기존 시스템을 버리지 않고 개선 가능한 구조로 연결했습니다.</p>
+            <div class="case-key-grid">
+              <div class="case-key-item">
+                <span class="case-mini-label">문제</span>
+                <strong>기존 JSP 구조만으로는 상호작용이 많은 화면과 재사용 구조에 한계</strong>
+              </div>
+              <div class="case-key-item">
+                <span class="case-mini-label">접근</span>
+                <strong>Vue 프로젝트를 별도 관리하고 빌드 산출물만 기존 배포 경로에 연결</strong>
+              </div>
+              <div class="case-key-item">
+                <span class="case-mini-label">결과</span>
+                <strong>기존 시스템을 유지하면서도 프론트엔드 구조를 단계적으로 확장 가능</strong>
+              </div>
+            </div>
+            <ul class="case-list">
+              <li>레거시 서버 구조를 유지하면서 Vue 프로젝트를 별도 디렉터리에서 관리</li>
+              <li>빌드 산출물만 기존 웹 애플리케이션 배포 경로에 연결해 느슨하게 결합</li>
+              <li>로그인 화면에서 v-model, axios POST, 라우터 이동 흐름을 구성</li>
+              <li>개발 시점 기준 안정성과 호환성을 고려해 Vue 2.6.14 선택</li>
+            </ul>
+            <div class="case-hook">기존 JSP 프로젝트를 전면 교체하지 않고 Vue를 별도 결합해 화면 계층을 점진 도입</div>
+            <div class="case-learned">
+              <span class="case-mini-label">What I Learned</span>
+              <p>기존 시스템 개선에서는 기술적으로 더 최신인 선택보다, 운영 환경 안에서 안전하게 붙일 수 있는 방식이 더 중요할 수 있음을 정리했습니다. 전면 교체보다 점진 도입이 실제 일정과 조직
+                조건 안에서 더 현실적인 개선 전략이 될 수 있다는 기준을 얻었습니다.</p>
+            </div>
+            <div class="case-links">
+              <a class="case-link" href="portfolio_case_assets/vue_case.pdf" target="_blank" rel="noopener">PDF 보기</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="case-study-card">
+          <div class="case-thumb">
+            <div class="case-thumb-frame">
+              <img src="portfolio_case_assets/excel_case.png" alt="대용량 엑셀 다운로드 기능 구현 및 성능 검증 대표 이미지" />
+            </div>
+            <div class="case-caption">엑셀 다운로드 구현 구조와 heap 조건별 검증 기준을 정리한 문서</div>
+          </div>
+          <div class="case-body">
+            <div class="case-header">
+              <span class="case-label">Implementation & Validation</span>
+              <span class="case-meta">Spring MVC · Apache POI · SXSSFWorkbook</span>
+            </div>
+            <h3>대용량 엑셀 다운로드 기능 구현 및 성능 검증</h3>
+            <p class="case-summary">파일명 설정, HTTP 헤더, 시트 작성, 출력 스트림 처리를 역할별로 분리하고, 데이터가 커질 때의 한계를 실험으로 확인했습니다.</p>
+            <div class="case-key-grid">
+              <div class="case-key-item">
+                <span class="case-mini-label">문제</span>
+                <strong>데이터가 커질수록 처리 시간과 heap 한계를 함께 고려해야 하는 상황</strong>
+              </div>
+              <div class="case-key-item">
+                <span class="case-mini-label">접근</span>
+                <strong>Service · View · Excel 생성 로직을 분리하고 SXSSFWorkbook 기반으로 구현</strong>
+              </div>
+              <div class="case-key-item">
+                <span class="case-mini-label">결과</span>
+                <strong>구현 후 heap 조건별 안정 구간과 실패 시점을 실험으로 검증</strong>
+              </div>
+            </div>
+            <ul class="case-list">
+              <li>JSP → Service → ResponseUtil → ExcelView → ExcelVO → Download 흐름으로 구현 구조 정리</li>
+              <li>SXSSFWorkbook과 flush 단위를 사용해 대용량 파일 출력을 고려한 구조 적용</li>
+              <li>2GB, 8GB, 12GB heap 조건에서 안정 구간과 실패 시점을 비교 검증</li>
+              <li>구현 이후 운영 환경에서의 한계와 개선 방향까지 정리</li>
+            </ul>
+            <div class="case-result">2GB heap에서는 약 80,000행, 8GB에서는 약 160,000행, 12GB에서는 약 250,000행까지 안정적으로 처리 가능한 구간을 확인
+            </div>
+            <div class="case-learned">
+              <span class="case-mini-label">What I Learned</span>
+              <p>기능 구현만으로는 충분하지 않고, 운영 환경에서 어디까지 버틸 수 있는지를 함께 검증해야 실제로 사용할 수 있는 기능이 된다는 점을 확인했습니다. 대용량 처리에서는 코드 구조만큼이나
+                메모리 조건과 실패 구간을 함께 아는 것이 중요했습니다.</p>
+            </div>
+            <div class="case-links">
+              <a class="case-link" href="portfolio_case_assets/excel_case.pdf" target="_blank" rel="noopener">PDF 보기</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="stack">
+      <div class="section-heading">
+        <h2>Tech Stack</h2>
+      </div>
+      <div class="section-card">
+        <div class="stack-grid">
+          <article class="stack-group">
+            <h3>Backend</h3>
+            <div class="chip-wrap">
+              <span class="chip">Java</span>
+              <span class="chip">Spring</span>
+              <span class="chip">Spring Boot</span>
+              <span class="chip">MyBatis</span>
+              <span class="chip">eGovFrame</span>
+              <span class="chip">Node.js</span>
+            </div>
+          </article>
+
+          <article class="stack-group">
+            <h3>Frontend</h3>
+            <div class="chip-wrap">
+              <span class="chip">JSP</span>
+              <span class="chip">JavaScript</span>
+              <span class="chip">Vue</span>
+              <span class="chip">Vuetify</span>
+              <span class="chip">Vuex</span>
+              <span class="chip">jQuery</span>
+              <span class="chip">WebSquare</span>
+            </div>
+          </article>
+
+          <article class="stack-group">
+            <h3>Database / Infra</h3>
+            <div class="chip-wrap">
+              <span class="chip">Oracle</span>
+              <span class="chip">MariaDB</span>
+              <span class="chip">SQL</span>
+              <span class="chip">SVN</span>
+              <span class="chip">Jenkins</span>
+              <span class="chip">CentOS</span>
+              <span class="chip">PuTTY</span>
+              <span class="chip">AWS</span>
+              <span class="chip">Naver Cloud</span>
+            </div>
+          </article>
+
+          <article class="stack-group">
+            <h3>Reporting / Utility</h3>
+            <div class="chip-wrap">
+              <span class="chip">Apache POI</span>
+              <span class="chip">JavaMail</span>
+              <span class="chip">CLIP report</span>
+              <span class="chip">Crownix</span>
+              <span class="chip">Excel VBA</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="work-style">
+          <strong>Working Style</strong><br />
+          업무 흐름을 먼저 파악한 뒤, 서버 · 데이터 · 파일 출력 · 운영 화면이 어떻게 연결되는지 기준으로 문제를 해결합니다. 새로운 프레임워크나 툴도 빠르게 익히되, 운영 환경에서 실제로 반영 가능한
+          수준까지 가져가는 것을 중요하게 생각합니다.
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="credibility">
+      <div class="section-heading">
+        <h2>Education · Certifications · Awards</h2>
+      </div>
+      <div class="info-grid">
+        <article class="info-card">
+          <h3>Education</h3>
+          <ul class="mini-list">
+            <li>
+              <strong>명지전문대</strong><br />
+              컴퓨터공학과 전문학사 (2016.03 – 2021.02.25) <br />
+              인터넷응용보안공학과 학사 (2021.03 – 2022.02.25)
+            </li>
+            <li>
+              <strong>NIPA-NAVER Cloud Platform Tech 부트캠프</strong> <br />
+              2025.08.04 – 2025.09.29 · 320H
+            </li>
+            <li>
+              <strong>NIPA-AWS Developer 부트캠프</strong> <br />
+              2025.11.03 – 2025.12.08 · 207H
+            </li>
+          </ul>
+        </article>
+
+        <article class="info-card">
+          <h3>Certifications</h3> <br />
+          <ul class="mini-list">
+            <li><strong>NCPA</strong><br />NAVER Cloud Platform Certified Associate · 2025.10</li>
+            <li><strong>SQLD</strong>&emsp;SQL 개발자 · 2025.06</li>
+            <li><strong>정보처리기사</strong>&emsp;2022.06</li>
+          </ul>
+        </article>
+
+        <article class="info-card">
+          <h3>Awards / Others</h3>
+          <ul class="mini-list">
+            <li>
+              <strong>NIPA-NAVER Cloud Platform Tech 부트캠프 최우수</strong>
+              클라우드 환경에서 금융 포트폴리오 관리 및 분석 에이전트 개발
+            </li>
+            <li>
+              <strong>Google Cloud Study Jam Skill Badges</strong> <br />
+              Compute, Cloud Storage API, IAM, BigQuery, Pub/Sub, Dataflow, Spanner, Bigtable, Looker, Gemini Enterprise 등 15개 배지
+            </li>
+            <li>
+              <strong>졸업작품전시회 동상</strong> <br />
+              웹 기반 ERP 시스템 개발
+            </li>
+            <li>
+              <strong>산업체 멘토 활동</strong> <br />
+              명지전문대학 · 2024.03 – 2024.12
+            </li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <footer class="footer">© Lee Seungwon · Java/Spring Backend Developer</footer>
+  </main>
+</body>
+
+</html>
