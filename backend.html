@@ -46,6 +46,18 @@
       text-decoration: none;
     }
 
+    .inline-link {
+      color: var(--primary);
+      font-weight: 800;
+      text-decoration: underline;
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 3px;
+    }
+
+    .inline-link:hover {
+      color: #b63a2b;
+    }
+
     img {
       max-width: 100%;
       display: block;
@@ -615,7 +627,7 @@
     }
 
     .stack-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
     }
 
     .chip-wrap {
@@ -816,12 +828,13 @@
   <main class="container">
     <section class="hero" id="about">
       <div class="card hero-main">
-        <span class="hero-kicker">4년 차 · 운영 시스템 백엔드 경험</span>
+        <span class="hero-kicker">4년 차 · 업무 시스템 백엔드 / 자동화 경험</span>
         <h1>운영 시스템 백엔드 개발자</h1>
         <p class="hero-role">Java / Spring Backend Developer</p>
         <div class="hero-summary">
           <p>Java, Spring, SQL 기반으로 내부 업무 시스템을 분석하고, 운영 요청을 기능 개선과 데이터 처리 구조로 연결해왔습니다. 인사급여 시스템 디지털 전환, 대용량 엑셀 다운로드,
-            레거시 구조 문서화, 금융권 SR 유지보수 경험을 바탕으로 기존 시스템을 인수하고 안정적으로 개선하는 데 강점이 있습니다.</p>
+            레거시 구조 문서화, 금융권 SR 유지보수 경험을 바탕으로 기존 시스템의 구조를 파악하고 운영 환경을 고려해 안정적으로 개선하는 데 강점이 있습니다. 최근에는 OpenAI API와 외부 서비스를 연결해
+            콘텐츠 운영 자동화 파이프라인을 구축하며, AI 기반 기능을 실제 운영 흐름에 적용하는 경험을 확장했습니다.</p>
         </div>
         <div class="proof-grid">
           <div class="proof-item">
@@ -834,7 +847,7 @@
           </div>
           <div class="proof-item">
             <span class="proof-label">강점</span>
-            <strong>레거시 인수 · 구조 분석 · 점진 개선</strong>
+            <strong>구조 분석 · 자동화 구현 · 운영 개선</strong>
           </div>
         </div>
       </div>
@@ -863,7 +876,7 @@
           <ul class="point-list">
             <li>수기 업무를 웹 기반 시스템과 자동화 흐름으로 전환</li>
             <li>운영 요청을 분석해 DB, 백엔드, 리포트 변경으로 반영</li>
-            <li>레거시 구조를 문서화하고 안전하게 점진 개선</li>
+            <li>OpenAI API와 외부 서비스를 연결해 검수·게시·기록 자동화 구현</li>
           </ul>
         </div>
 
@@ -875,8 +888,8 @@
               <span class="mini-value">정보처리기사 · SQLD · NCPA</span>
             </li>
             <li>
-              <span class="mini-label">수상</span>
-              <span class="mini-value">Google Cloud Skill Badge 15개 · NIPA-NAVER Cloud 부트캠프 최우수</span>
+              <span class="mini-label">Certifications</span>
+              <span class="mini-value">Google Skills 배지 15개 · NIPA-NAVER Cloud 부트캠프 최우수</span>
             </li>
           </ul>
         </div>
@@ -890,6 +903,10 @@
           <article class="hero-detail-item">
             <strong>인사급여 시스템 DX</strong>
             <p>수기 급여 업무를 직원 등록, 급여 계산, 엑셀 생성, 메일 발송 자동화 흐름으로 전환</p>
+          </article>
+          <article class="hero-detail-item">
+            <strong>AI 콘텐츠 자동화</strong>
+            <p>OpenAI, Supabase, Discord, Notion, Instagram API를 연결해 검수와 게시까지 이어지는 상태 기반 파이프라인 구현</p>
           </article>
           <article class="hero-detail-item">
             <strong>대용량 엑셀 다운로드</strong>
@@ -928,6 +945,28 @@
               <li>후속 단계에서 Spring Boot 전환과 Vue 적용으로 구조 개선</li>
             </ul>
             <div class="result-box">약 2주 걸리던 급여 처리 업무를 시스템 기반으로 단축하고, 전체 직원 대상 급여명세서 발송을 10분 이내 수준으로 개선</div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-side">
+            <span class="eyebrow">AI Workflow Automation</span>
+            <h3>Brand Pilot 콘텐츠 운영 자동화 파이프라인</h3>
+            <div class="project-meta">Node.js CLI · Supabase · OpenAI API · 2026.04 - 진행중</div>
+          </div>
+          <div class="project-main">
+            <p class="project-summary">브랜딩·마케팅 자료를 AI 초안으로 전환하고, 관리자 검수 후 카드뉴스 게시와 기록까지 이어지도록 자동화했습니다.</p>
+            <ul class="project-points">
+              <li>OpenAI API와 JSON Schema로 콘텐츠 산출물 생성</li>
+              <li>Supabase Postgres 기반 상태 저장 구조 구성</li>
+              <li>Discord 검수와 GitHub Actions 실행 흐름 연결</li>
+              <li>Instagram 게시, Storage 업로드, Notion 기록 연동</li>
+              <li>재시도, 중복 실행 방지, 운영 진단 흐름 정리</li>
+            </ul>
+            <div class="result-box">수집, 생성, 검수, 게시, 기록까지 이어지는 전체 자동화 흐름을 구현하고 125개 테스트로 검증</div>
+            <div class="case-links">
+              <a class="case-link" href="https://github.com/2pow1/Brand_Pilot" target="_blank" rel="noopener">GitHub 보기</a>
+            </div>
           </div>
         </article>
 
@@ -1192,6 +1231,7 @@
             <div class="chip-wrap">
               <span class="chip">Oracle</span>
               <span class="chip">MariaDB</span>
+              <span class="chip">Supabase Postgres</span>
               <span class="chip">SQL</span>
               <span class="chip">SVN</span>
               <span class="chip">Jenkins</span>
@@ -1199,6 +1239,19 @@
               <span class="chip">PuTTY</span>
               <span class="chip">AWS</span>
               <span class="chip">Naver Cloud</span>
+            </div>
+          </article>
+
+          <article class="stack-group">
+            <h3>AI / Automation</h3>
+            <div class="chip-wrap">
+              <span class="chip">OpenAI API</span>
+              <span class="chip">JSON Schema</span>
+              <span class="chip">GitHub Actions</span>
+              <span class="chip">Playwright</span>
+              <span class="chip">Discord API</span>
+              <span class="chip">Notion API</span>
+              <span class="chip">Instagram Graph API</span>
             </div>
           </article>
 
@@ -1263,8 +1316,9 @@
               클라우드 환경에서 금융 포트폴리오 관리 및 분석 에이전트 개발
             </li>
             <li>
-              <strong>Google Cloud Study Jam Skill Badges</strong> <br />
-              Compute, Cloud Storage API, IAM, BigQuery, Pub/Sub, Dataflow, Spanner, Bigtable, Looker, Gemini Enterprise 등 15개 배지
+              <strong>Google Skills</strong> <br />
+              취득한 배지 15개 <br />
+              <a class="inline-link" href="https://www.credly.com/users/username.68b6b924" target="_blank" rel="noopener">Credly에서 확인</a>
             </li>
             <li>
               <strong>졸업작품전시회 동상</strong> <br />
